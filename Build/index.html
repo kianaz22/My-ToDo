@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My ToDo</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/7ece4321d0.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="background-circle top-right"></div>
+    <div class="background-circle bottom-left"></div>
+    
+    <div class="main-container">
+        <p class="intro">Good Evening</p>
+        <h1 class="title">My ToDo</h1>
+        <div class="todos-container">
+            <div class="input-todo-container">
+                <input type="text" id="input-todo" placeholder="Type something ...">
+                <button class="btn-add" id="btn-add">
+                    <i class="fa fa-plus" id="btn-add-icon"></i>
+                </button>
+            </div>
+            <ul id="todos-list"></ul>
+        </div>
+    </div>
+
+    <div id="modal-delete" class="modal-overlay">
+        <button class="btn-close">
+            <i class="fa fa-times"></i>
+        </button>
+        <div class="modal-body">
+            <p>Are you sure you want to delete "Test" task?</p>
+            <div class="modal-buttons-container">
+                <button id="btn-delete">Yes, Delete</button>
+                <button id="btn-cancel">No, Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-video" class="modal-overlay">
+        <button class="btn-close">
+            <i class="fa fa-times"></i>
+        </button>
+        <div class="modal-body no-padding">
+            <video src="" id="video" width="100%" height="100%" controls></video>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
