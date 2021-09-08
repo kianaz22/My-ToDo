@@ -22,14 +22,16 @@ function openModalVideo() {
     modalVideo.style.display = 'flex';
 }
 function getVideo() {
-    fetch("http://api.aparat.com/fa/v1/video/video/mostViewedVideos")
+    openModalVideo();
+
+    fetch("https://api.aparat.com/fa/v1/video/video/mostViewedVideos", {
+        "method": "GET"})
         .then(res => res.json())
         .then(res => showVideo(res.data[0].attributes.preview_src))
         .catch(err => console.error(err))
 }
 function showVideo(src) {
     video.src = src;
-    openModalVideo();
 }
 /* end of video modal */
 
@@ -41,6 +43,8 @@ deleteBtn.addEventListener('click', deleteTodo);
 
 const cancelBtn = document.getElementById('btn-cancel')
 cancelBtn.addEventListener('click', closeModal);
+
+const modalSpan = document.getElementById("modal-span");
 
 window.addEventListener('click', outsideClick);
 
@@ -75,7 +79,7 @@ function renderTodoList() {
 
         const deleteIcon = document.createElement("i");
         deleteIcon.classList.add("fa", "fa-trash");
-        deleteIcon.addEventListener("click", event => deleteMode(parseInt(event.target.parentElement.getAttribute("key"))));
+        deleteIcon.addEventListener("click", deleteMode);
 
         const editIcon = document.createElement("i");
         editIcon.classList.add("fa", "fa-pen");
@@ -140,8 +144,9 @@ function editTodo(e) {
         setLocalStorage(todoList);
     }
 }
-function deleteMode(key) {
-    deleteBtn.setAttribute("key", key);
+function deleteMode(e) {
+    deleteBtn.setAttribute("key", e.target.parentElement.getAttribute("key"));
+    modalSpan.textContent = e.target.previousElementSibling.children[0].textContent;
     openModalDelete();
 }
 function deleteTodo(e) {
