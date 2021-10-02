@@ -1,58 +1,3 @@
-/* modal */
-const closeBtn = document.querySelectorAll('.btn-close');
-closeBtn.forEach(item => item.addEventListener('click', closeModal));
-
-function closeModal() {
-    modalDelete.style.display = 'none';
-    modalVideo.style.display = 'none';
-}
-function outsideClick(e) {
-    if (e.target == modalDelete || e.target == modalVideo ) {
-        modalDelete.style.display = 'none';
-        
-    }
-}
-/* end of  modal */
-
-/* video modal */
-const modalVideo = document.getElementById('modal-video');
-const video = document.getElementById('video');
-
-function openModalVideo() {
-    modalVideo.style.display = 'flex';
-}
-function getVideo() {
-    openModalVideo();
-
-    fetch("https://api.aparat.com/fa/v1/video/video/mostViewedVideos", {
-        "method": "GET"})
-        .then(res => res.json())
-        .then(res => showVideo(res.data[0].attributes.preview_src))
-        .catch(err => console.error(err))
-}
-function showVideo(src) {
-    video.src = src;
-}
-/* end of video modal */
-
-/* delete modal */
-const modalDelete = document.getElementById('modal-delete');
-
-const deleteBtn = document.getElementById('btn-delete')
-deleteBtn.addEventListener('click', deleteTodo);
-
-const cancelBtn = document.getElementById('btn-cancel')
-cancelBtn.addEventListener('click', closeModal);
-
-const modalSpan = document.getElementById("modal-span");
-
-window.addEventListener('click', outsideClick);
-
-function openModalDelete() {
-    modalDelete.style.display = 'flex';
-}
-/* end of delete modal */
-
 
 /* main */
 let counter = 0;
@@ -154,14 +99,26 @@ function deleteTodo(e) {
     setLocalStorage(todoList);
     closeModal();
 }
-function check(){
-    counter++;
- if (counter === 5){
-     counter = 0;
-     getVideo();
- }
- localStorage.setItem("storedCounter", JSON.stringify(counter));
-}
 
 /* end of main */
 
+/* delete modal */
+
+function closeModal() {
+    modalDelete.style.display = 'none';
+}
+
+const modalDelete = document.getElementById('modal-delete');
+
+const deleteBtn = document.getElementById('btn-delete')
+deleteBtn.addEventListener('click', deleteTodo);
+
+const cancelBtn = document.getElementById('btn-cancel')
+cancelBtn.addEventListener('click', closeModal);
+
+const modalSpan = document.getElementById("modal-span");
+
+function openModalDelete() {
+    modalDelete.style.display = 'flex';
+}
+/* end of delete modal */
